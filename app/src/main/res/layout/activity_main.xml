@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:hapticFeedbackEnabled="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -58,6 +59,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/rightButton"
             app:layout_constraintStart_toStartOf="@+id/leftButton" />
+
+        <ImageButton
+            android:id="@+id/stopButton"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:background="@drawable/rouded_button"
+            android:hapticFeedbackEnabled="true"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomButton"
+            app:layout_constraintEnd_toEndOf="@+id/rightButton"
+            app:layout_constraintStart_toStartOf="@+id/leftButton"
+            app:layout_constraintTop_toTopOf="@+id/topButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

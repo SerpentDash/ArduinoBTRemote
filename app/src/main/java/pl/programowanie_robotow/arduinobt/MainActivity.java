@@ -10,10 +10,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.VibrationEffect;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.os.Vibrator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -35,13 +37,15 @@ public class MainActivity extends AppCompatActivity {
     private OutputStream outputStream;
     private InputStream inputStream;
     Button startButton, stopButton;
-    ImageButton[] movementBtns = new ImageButton[4];
+    ImageButton[] movementBtns = new ImageButton[5];
     boolean deviceConnected = false;
 
     private static String[] PERMISSIONS_BLUETOOTH = {
             android.Manifest.permission.BLUETOOTH_SCAN,
             android.Manifest.permission.BLUETOOTH_CONNECT
     };
+
+    private Vibrator vib;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -50,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActivityCompat.requestPermissions(this, PERMISSIONS_BLUETOOTH,1);
+
+        vib = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothAdapter.disable();
@@ -72,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         movementBtns[1] = findViewById(R.id.leftButton);
         movementBtns[2] = findViewById(R.id.rightButton);
         movementBtns[3] = findViewById(R.id.bottomButton);
+        movementBtns[4] = findViewById(R.id.stopButton);
 
         setupButtons();
 
@@ -143,15 +150,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setupButtons() {
-        movementBtns[0].setOnClickListener(view -> onClickSend("top"));
-        movementBtns[1].setOnClickListener(view -> onClickSend("left"));
-        movementBtns[2].setOnClickListener(view -> onClickSend("right"));
-        movementBtns[3].setOnClickListener(view -> onClickSend("bottom "));
+        movementBtns[0].setOnClickListener(view -> onClickSend("t")); // top
+        movementBtns[1].setOnClickListener(view -> onClickSend("l")); // left
+        movementBtns[2].setOnClickListener(view -> onClickSend("r")); // right
+        movementBtns[3].setOnClickListener(view -> onClickSend("b")); // bottom
+        movementBtns[4].setOnClickListener(view -> onClickSend("s")); // stop
     }
 
     public void onClickSend(String data) {
         try {
             outputStream.write(data.getBytes());
+            vib.vibrate(VibrationEffect.createOneShot(125,70));
             Log.d("Sent:", data);
         } catch (IOException e) {
             e.printStackTrace();
