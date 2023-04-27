@@ -1,2 +1,2 @@
-# ArduinoBTPilot
-Basic bluetooth remote for subject 'Programowanie robotów'
+# ArduinoBTRemote
+Basic bluetooth remote for subject 'Programowanie robotów' in Android Studio (Java)
