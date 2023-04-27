@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_focused="false"
+        android:state_pressed="false">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@color/purple_200"/>
+                    <corners
+                        android:bottomLeftRadius="300dp"
+                        android:bottomRightRadius="0dp"
+                        android:topLeftRadius="0dp"
+                        android:topRightRadius="100dp"/>
+                </shape>
+            </item>
+
+            <item>
+                <rotate
+                    android:fromDegrees="-135"
+                    android:toDegrees="0"
+                    android:drawable="@drawable/baseline_arrow_drop_up_24">
+                </rotate>
+            </item>
+        </layer-list>
+    </item>
+    <item
+        android:state_focused="false"
+        android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@color/purple_300"/>
+                    <corners
+                        android:bottomLeftRadius="300dp"
+                        android:bottomRightRadius="0dp"
+                        android:topLeftRadius="0dp"
+                        android:topRightRadius="100dp"/>
+                </shape>
+            </item>
+
+            <item
+                android:top="10dp"
+                android:bottom="10dp"
+                android:right="10dp"
+                android:left="10dp">
+                <rotate
+                    android:fromDegrees="-135"
+                    android:toDegrees="0"
+                    android:drawable="@drawable/baseline_arrow_drop_up_24">
+                </rotate>
+            </item>
+        </layer-list>
+    </item>
+</selector>
