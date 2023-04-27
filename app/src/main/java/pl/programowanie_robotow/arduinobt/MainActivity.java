@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -24,6 +25,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Set;
 import java.util.UUID;
+
 
 public class MainActivity extends AppCompatActivity {
     private final String DEVICE_NAME="MSlave"; // Target device name
@@ -36,11 +38,18 @@ public class MainActivity extends AppCompatActivity {
     ImageButton[] movementBtns = new ImageButton[4];
     boolean deviceConnected = false;
 
+    private static String[] PERMISSIONS_BLUETOOTH = {
+            android.Manifest.permission.BLUETOOTH_SCAN,
+            android.Manifest.permission.BLUETOOTH_CONNECT
+    };
+
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActivityCompat.requestPermissions(this, PERMISSIONS_BLUETOOTH,1);
 
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothAdapter.disable();
