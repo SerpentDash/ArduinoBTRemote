@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothAdapter.disable();
 
-        // make sure bt connection is closed with bt device then connect again
+        // make sure bt connection is closed then connect again
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -182,17 +182,17 @@ public class MainActivity extends AppCompatActivity {
     private final BroadcastReceiver restartBluetooth = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
+        final String action = intent.getAction();
 
-            if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
-                final int bluetoothState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-                        BluetoothAdapter.ERROR);
-                switch (bluetoothState) {
-                    case BluetoothAdapter.STATE_ON:
-                        startButton.setEnabled(true);
-                        break;
-                }
+        if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+            final int bluetoothState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
+                    BluetoothAdapter.ERROR);
+            switch (bluetoothState) {
+                case BluetoothAdapter.STATE_ON:
+                    startButton.setEnabled(true);
+                    break;
             }
+        }
         }
     };
 }
